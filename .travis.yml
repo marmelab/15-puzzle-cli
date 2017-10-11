@@ -1,9 +1,14 @@
 # https://travis-ci.com/marmelab/15-puzzle-cli
 
+sudo: required
+
 language: python
 
 python:
   - "3.5"
+
+services:
+  - docker
 
 install: true
 

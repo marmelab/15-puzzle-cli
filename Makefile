@@ -1,5 +1,10 @@
-run:
-	cd src && python3 index.py
+build:
+	docker build -t 15-puzzle-cli .
 
-test:
-	cd src && python3 -m unittest discover --v
+PYTHON := docker run -it --rm 15-puzzle-cli python3
+
+run: build
+	$(PYTHON) index.py .
+
+test: build
+	$(PYTHON) -m unittest discover --v .
