@@ -3,6 +3,7 @@ from renderer import welcome, show_grid
 
 DEFAULT_GRID = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
 
+
 class GameTest(unittest.TestCase):
 
     def test_start(self):
@@ -14,5 +15,5 @@ class GameTest(unittest.TestCase):
 5    6    7    8    
 9    10   11   12   
 13   14   15   0    
-"""
+"""  # noqa
         self.assertEqual(show_grid(DEFAULT_GRID), grid_rendered)

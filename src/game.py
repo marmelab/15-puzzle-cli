@@ -1,4 +1,4 @@
-def build_grid(size = 4):
+def build_grid(size=4):
     max_size = size ** 2 - 1
     grid = []
     for x in range(0, size):

@@ -7,5 +7,5 @@ def show_grid(grid):
     for row in grid:
         for tile in row:
             grid_to_show += '{0:<5}'.format(tile)
-        grid_to_show += '\n';
+        grid_to_show += '\n'
     return grid_to_show
