@@ -1,4 +1,4 @@
-import game as game
+import game
 
 
 def show_grid(grid):
