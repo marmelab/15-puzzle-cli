@@ -1,3 +1,13 @@
+from enum import Enum
+
+
+class Move(Enum):
+    TOP = 1
+    RIGHT = 2
+    BOTTOM = 3
+    LEFT = 4
+
+
 def build_grid(size=4):
     max_size = size ** 2 - 1
     grid = []
@@ -9,4 +19,52 @@ def build_grid(size=4):
                 tile = 0  # Corresponds to the empty box
             row.append(tile)
         grid.append(row)
+    return grid
+
+DEFAULT_GRID = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
+
+
+def find_empty_tile(grid):
+    y = 0
+    while y < len(grid):
+        x = 0
+        while x < len(grid[y]):        
+            if grid[y][x] == 0: 
+                return [y, x]
+            x+=1
+        y+=1
+    return [-1, -1]
+
+
+def possible_moves(grid):
+    empty_tile = find_empty_tile(grid)
+
+    moves = []
+    if empty_tile[0] != 0:
+        moves.append(Move.TOP)
+    if empty_tile[1] != len(grid) - 1:
+        moves.append(Move.RIGHT)
+    if empty_tile[0] != len(grid) - 1:
+        moves.append(Move.BOTTOM)
+    if empty_tile[1] != 0:
+        moves.append(Move.LEFT)
+    return moves
+
+
+def move(grid, direction):
+    empty_tile = find_empty_tile(grid)
+
+    if direction == Move.TOP:
+        new_empty_tile = [empty_tile[0] - 1, empty_tile[1]]
+    elif direction == Move.RIGHT:
+        new_empty_tile = [empty_tile[0], empty_tile[1] + 1]
+    elif direction == Move.BOTTOM:
+        new_empty_tile = [empty_tile[0] + 1, empty_tile[1]]
+    else:
+        new_empty_tile = [empty_tile[0], empty_tile[1] - 1]
+
+    value = grid[empty_tile[0]][empty_tile[1]]
+    grid[empty_tile[0]][empty_tile[1]] = grid[new_empty_tile[0]][new_empty_tile[1]] 
+    grid[new_empty_tile[0]][new_empty_tile[1]] = value
+
     return grid
