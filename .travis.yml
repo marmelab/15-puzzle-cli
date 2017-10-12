@@ -10,6 +10,6 @@ python:
 services:
   - docker
 
-install: true
-
-script: make test
+script:
+  - make linter
+  - make test
