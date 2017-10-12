@@ -3,11 +3,11 @@ build:
 
 DOCKER := docker run -it --rm 15-puzzle-cli
 
-run: build
+run:
 	$(DOCKER) python3 index.py
 
-test: build
+test:
 	$(DOCKER) python3 -m unittest discover --v
 
-lint: build
+lint:
 	$(DOCKER) pep8 .
