@@ -1,17 +1,11 @@
-import game
+from game import build_grid
+from renderer import welcome, show_grid
 
 
-def show_grid(grid):
-    for row in grid:
-        for tile in row:
-            print('{0:<5}'.format(tile), end='')
-        print()
+def init():
+    print(welcome())
+    grid = build_grid()
+    print(show_grid(grid))
 
-
-def start_game():
-    print(game.start())
-
-    grid = game.build_grid()
-    show_grid(grid)
-
-start_game()
+if __name__ == '__main__':
+    init()

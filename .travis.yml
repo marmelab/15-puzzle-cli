@@ -11,5 +11,9 @@ services:
   - docker
 
 script:
-  - make linter
+  - make lint
   - make test
+
+branches:
+  only:
+    - master
