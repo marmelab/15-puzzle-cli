@@ -10,6 +10,10 @@ python:
 services:
   - docker
 
-install: true
+script:
+  - make lint
+  - make test
 
-script: make test
+branches:
+  only:
+    - master
