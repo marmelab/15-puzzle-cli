@@ -7,7 +7,7 @@ def start():
 # Grid management
 
 
-def buildGrid():
+def build_grid():
     grid = []
     for x in range(0, 4):
         row = []
