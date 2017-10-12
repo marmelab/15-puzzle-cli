@@ -9,8 +9,11 @@ def init():
     while True:
         print(show_grid(grid))
         print(show_moves(possible_moves(grid)))
-        direction = ask_move()
-        grid = move(grid, direction)
+        try:
+            direction = ask_move()
+            grid = move(grid, direction)
+        except Exception as error:
+            print(error)
 
 
 

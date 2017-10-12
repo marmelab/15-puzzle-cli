@@ -1,19 +1,20 @@
 from game import Move
 
-
 def welcome():
     return 'Welcome to the 15 puzzle game.'
 
 
 def show_grid(grid):
-    grid_to_show = '\n___________________\n\n'
+    horizontal_line = '\n' + ('_' * (len(grid) * 5 - 1)) + '\n\n'
+    grid_to_show = horizontal_line
     for row in grid:
         for tile in row:
             if tile == 0:
                 tile = '  '
             grid_to_show += '{0:<5}'.format('|' + str(tile) + '|')
-        grid_to_show += '\n___________________\n\n'
+        grid_to_show += horizontal_line
     return grid_to_show
+
 
 def show_moves(possible_moves):
     msg = 'You are allowed to go: '
@@ -29,8 +30,9 @@ def show_moves(possible_moves):
             msg += '(L)eft '
     return msg
 
+
 def ask_move():
-    direction = input('Choose a direction ')
+    direction = input('Choose a direction (T)op, (R)ight, (B)ottom, (L)eft: ')
     if direction == 'T':
         return Move.TOP
     elif direction == 'R':

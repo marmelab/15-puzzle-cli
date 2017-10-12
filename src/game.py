@@ -21,7 +21,6 @@ def build_grid(size=4):
         grid.append(row)
     return grid
 
-DEFAULT_GRID = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
 
 
 def find_empty_tile(grid):
@@ -29,7 +28,7 @@ def find_empty_tile(grid):
     while y < len(grid):
         x = 0
         while x < len(grid[y]):        
-            if grid[y][x] == 0: 
+            if grid[y][x] == 0:
                 return [y, x]
             x+=1
         y+=1
@@ -38,8 +37,11 @@ def find_empty_tile(grid):
 
 def possible_moves(grid):
     empty_tile = find_empty_tile(grid)
-
     moves = []
+
+    if empty_tile == [-1, -1]:
+        return moves;
+
     if empty_tile[0] != 0:
         moves.append(Move.TOP)
     if empty_tile[1] != len(grid) - 1:
@@ -54,14 +56,19 @@ def possible_moves(grid):
 def move(grid, direction):
     empty_tile = find_empty_tile(grid)
 
+    if direction not in possible_moves(grid) or empty_tile == [-1, -1]:
+        return grid
+
     if direction == Move.TOP:
         new_empty_tile = [empty_tile[0] - 1, empty_tile[1]]
     elif direction == Move.RIGHT:
         new_empty_tile = [empty_tile[0], empty_tile[1] + 1]
     elif direction == Move.BOTTOM:
         new_empty_tile = [empty_tile[0] + 1, empty_tile[1]]
-    else:
+    elif direction == Move.LEFT:
         new_empty_tile = [empty_tile[0], empty_tile[1] - 1]
+    else:
+        raise Exception('The direction provided to the move function is not allowed')
 
     value = grid[empty_tile[0]][empty_tile[1]]
     grid[empty_tile[0]][empty_tile[1]] = grid[new_empty_tile[0]][new_empty_tile[1]] 
