@@ -1,4 +1,6 @@
+import numpy as np
 from game_exception import MoveException, NoEmptyTileException
+
 
 class Move():
     TOP = 'TOP'
@@ -18,7 +20,7 @@ def build_grid(size=4):
                 tile = 0  # Corresponds to the empty box
             row.append(tile)
         grid.append(row)
-    return grid
+    return np.array(grid)
 
 
 def find_empty_tile(grid):
@@ -50,24 +52,27 @@ def possible_moves(grid):
 
 
 def move(grid, direction):
-    empty_tile = find_empty_tile(grid)
+    y, x = find_empty_tile(grid)
 
     if direction not in possible_moves(grid):
         return grid
 
     if direction == Move.TOP:
-        new_empty_tile = [empty_tile[0] - 1, empty_tile[1]]
+        new_x = x
+        new_y = y - 1
     elif direction == Move.RIGHT:
-        new_empty_tile = [empty_tile[0], empty_tile[1] + 1]
+        new_x = x + 1
+        new_y = y
     elif direction == Move.BOTTOM:
-        new_empty_tile = [empty_tile[0] + 1, empty_tile[1]]
+        new_x = x
+        new_y = y + 1
     elif direction == Move.LEFT:
-        new_empty_tile = [empty_tile[0], empty_tile[1] - 1]
+        new_x = x - 1
+        new_y = y
     else:
         raise MoveException('This direction is not allowed')
 
-    value = grid[empty_tile[0]][empty_tile[1]]
-    grid[empty_tile[0]][empty_tile[1]] = grid[new_empty_tile[0]][new_empty_tile[1]]
-    grid[new_empty_tile[0]][new_empty_tile[1]] = value
-
-    return grid
+    new_grid = grid.copy()
+    new_grid[y][x] = grid[new_y][new_x]
+    new_grid[new_y][new_x] = grid[y][x]
+    return new_grid
