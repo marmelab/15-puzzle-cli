@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
-from game import Move, build_grid, find_empty_tile, possible_moves, move
-from game_exception import MoveException, NoEmptyTileException
+from game.game import Move, build_grid, find_empty_tile, possible_moves, move
+from game.exception import MoveException, NoEmptyTileException
 
 
 class GameTest(unittest.TestCase):

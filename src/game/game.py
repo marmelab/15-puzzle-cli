@@ -1,5 +1,5 @@
 import numpy as np
-from game_exception import MoveException, NoEmptyTileException
+from game.exception import MoveException, NoEmptyTileException
 
 
 class Move():
