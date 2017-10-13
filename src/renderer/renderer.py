@@ -32,7 +32,7 @@ def show_moves(possible_moves):
             msg += '(R)ight '
         elif move == Move.BOTTOM:
             msg += '(B)ottom '
-        else:
+        elif move == Move.LEFT:
             msg += '(L)eft '
     return msg
 
