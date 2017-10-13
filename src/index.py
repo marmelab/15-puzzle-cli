@@ -1,11 +1,26 @@
-from game import build_grid
-from renderer import welcome, show_grid
+import sys
+from game.exception import MoveException
+from game.game import Move, build_grid, possible_moves, move
+from renderer import welcome, show_grid, ask_move, show_moves
 
 
 def init():
-    print(welcome())
+    print('\n\n' + welcome(), end='\n\n')
     grid = build_grid()
-    print(show_grid(grid))
+
+    while True:
+        print(show_grid(grid))
+        print(show_moves(possible_moves(grid)))
+        direction = ask_move()
+        try:
+            grid = move(grid, direction)
+        except MoveException as error:
+            print('=> ' + str(error))
+
 
 if __name__ == '__main__':
-    init()
+    try:
+        init()
+    except KeyboardInterrupt:
+        print('\nGoodbye')
+        sys.exit(0)

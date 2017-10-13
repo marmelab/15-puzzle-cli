@@ -4,5 +4,7 @@ ADD requirements.txt .
 RUN pip install -r requirements.txt
 RUN rm requirements.txt
 
+ADD tox.ini .
+
 ADD src /src
 WORKDIR /src

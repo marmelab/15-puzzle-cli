@@ -10,6 +10,9 @@ python:
 services:
   - docker
 
+install:
+  - make build
+
 script:
   - make lint
   - make test
