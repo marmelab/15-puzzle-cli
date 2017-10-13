@@ -34,11 +34,11 @@ def show_moves(possible_moves):
 
 def ask_move():
     direction = input('Choose a direction (T)op, (R)ight, (B)ottom, (L)eft: ')
-    if direction == 'T':
+    if direction in ['T', 't']:
         return Move.TOP
-    elif direction == 'R':
+    elif direction in ['R', 'r']:
         return Move.RIGHT
-    elif direction == 'B':
+    elif direction in ['B', 'b']:
         return Move.BOTTOM
-    elif direction == 'L':
+    elif direction in ['L', 'l']:
         return Move.LEFT
