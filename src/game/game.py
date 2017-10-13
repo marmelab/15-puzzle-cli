@@ -1,12 +1,8 @@
 import numpy as np
+from game.Move import Move
 from game.exception import MoveException, NoEmptyTileException
 
-
-class Move():
-    TOP = 'TOP'
-    RIGHT = 'RIGHT'
-    BOTTOM = 'BOTTOM'
-    LEFT = 'LEFT'
+EMPTY_TILE_COORDS = [0, 0]
 
 
 def build_grid(size=4):
@@ -17,6 +13,8 @@ def build_grid(size=4):
         for y in range(0, size):
             tile = x * size + y + 1
             if tile > max_size:
+                EMPTY_TILE_COORDS[0] = y
+                EMPTY_TILE_COORDS[1] = x
                 tile = 0  # Corresponds to the empty box
             row.append(tile)
         grid.append(row)
@@ -36,17 +34,17 @@ def find_empty_tile(grid):
 
 
 def possible_moves(grid):
-    empty_tile = find_empty_tile(grid)
+    y, x = find_empty_tile(grid)
 
     moves = []
 
-    if not empty_tile[0] == 0:
+    if not y == 0:
         moves.append(Move.TOP)
-    if not empty_tile[1] == len(grid) - 1:
+    if not x == len(grid) - 1:
         moves.append(Move.RIGHT)
-    if not empty_tile[0] == len(grid) - 1:
+    if not y == len(grid) - 1:
         moves.append(Move.BOTTOM)
-    if not empty_tile[1] == 0:
+    if not x == 0:
         moves.append(Move.LEFT)
     return moves
 

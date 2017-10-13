@@ -1,6 +1,6 @@
 import sys
 from game.exception import MoveException
-from game.game import Move, build_grid, find_empty_tile, possible_moves, move
+from game.game import Move, build_grid, possible_moves, move
 from renderer import welcome, show_grid, ask_move, show_moves
 
 

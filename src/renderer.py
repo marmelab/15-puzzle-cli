@@ -1,4 +1,4 @@
-from game.game import Move
+from game.Move import Move
 
 
 def welcome():
