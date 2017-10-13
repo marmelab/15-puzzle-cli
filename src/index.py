@@ -1,7 +1,7 @@
 import sys
 from game.exception import MoveException
 from game.game import Move, build_grid, possible_moves, move
-from renderer import welcome, show_grid, ask_move, show_moves
+from renderer.renderer import welcome, show_grid, ask_move, show_moves
 
 
 def init():

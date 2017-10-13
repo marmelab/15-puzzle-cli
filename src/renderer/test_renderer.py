@@ -1,5 +1,5 @@
 import unittest
-from renderer import welcome, show_grid
+from renderer.renderer import welcome, show_grid
 
 DEFAULT_GRID = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
 
