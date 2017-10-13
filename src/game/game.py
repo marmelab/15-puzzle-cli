@@ -2,8 +2,6 @@ import numpy as np
 from game.Move import Move
 from game.exception import MoveException, NoEmptyTileException
 
-EMPTY_TILE_COORDS = [0, 0]
-
 
 def build_grid(size=4):
     max_size = size ** 2 - 1
@@ -13,8 +11,6 @@ def build_grid(size=4):
         for y in range(0, size):
             tile = x * size + y + 1
             if tile > max_size:
-                EMPTY_TILE_COORDS[0] = y
-                EMPTY_TILE_COORDS[1] = x
                 tile = 0  # Corresponds to the empty box
             row.append(tile)
         grid.append(row)
