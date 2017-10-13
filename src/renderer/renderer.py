@@ -6,13 +6,14 @@ def welcome():
 
 
 def show_grid(grid):
-    horizontal_line = '\n' + ('_' * (len(grid) * 5 - 1)) + '\n\n'
+    horizontal_line = '\n|' + ('-' * (len(grid) * 5 - 1)) + '|\n'
     grid_to_show = horizontal_line
     for row in grid:
+        grid_to_show += '|'
         for tile in row:
             if tile == 0:
                 tile = '  '
-            grid_to_show += '{0:<5}'.format('|' + str(tile) + '|')
+            grid_to_show += ' ' + '{0:>2}'.format(tile) + ' |'
         grid_to_show += horizontal_line
     return grid_to_show
 
