@@ -1,5 +1,6 @@
 from game import Move, build_grid, find_empty_tile, possible_moves, move
 from renderer import welcome, show_grid, ask_move, show_moves
+from game_exception import MoveException
 
 
 def init():
@@ -12,7 +13,7 @@ def init():
         try:
             direction = ask_move()
             grid = move(grid, direction)
-        except Exception as error:
+        except MoveException as error:
             print(error)
 
 

@@ -1,11 +1,10 @@
-from enum import Enum
+from game_exception import MoveException, NoEmptyTileException
 
-
-class Move(Enum):
-    TOP = 1
-    RIGHT = 2
-    BOTTOM = 3
-    LEFT = 4
+class Move():
+    TOP = 'TOP'
+    RIGHT = 'RIGHT'
+    BOTTOM = 'BOTTOM'
+    LEFT = 'LEFT'
 
 
 def build_grid(size=4):
@@ -31,23 +30,21 @@ def find_empty_tile(grid):
                 return [y, x]
             x += 1
         y += 1
-    return [-1, -1]
+    raise NoEmptyTileException('The grid should contain an empty tile')
 
 
 def possible_moves(grid):
     empty_tile = find_empty_tile(grid)
+
     moves = []
 
-    if empty_tile == [-1, -1]:
-        return moves
-
-    if empty_tile[0] != 0:
+    if not empty_tile[0] == 0:
         moves.append(Move.TOP)
-    if empty_tile[1] != len(grid) - 1:
+    if not empty_tile[1] == len(grid) - 1:
         moves.append(Move.RIGHT)
-    if empty_tile[0] != len(grid) - 1:
+    if not empty_tile[0] == len(grid) - 1:
         moves.append(Move.BOTTOM)
-    if empty_tile[1] != 0:
+    if not empty_tile[1] == 0:
         moves.append(Move.LEFT)
     return moves
 
@@ -55,7 +52,7 @@ def possible_moves(grid):
 def move(grid, direction):
     empty_tile = find_empty_tile(grid)
 
-    if direction not in possible_moves(grid) or empty_tile == [-1, -1]:
+    if direction not in possible_moves(grid):
         return grid
 
     if direction == Move.TOP:
@@ -67,7 +64,7 @@ def move(grid, direction):
     elif direction == Move.LEFT:
         new_empty_tile = [empty_tile[0], empty_tile[1] - 1]
     else:
-        raise Exception('The direction provided to the move function is not allowed')
+        raise MoveException('This direction is not allowed')
 
     value = grid[empty_tile[0]][empty_tile[1]]
     grid[empty_tile[0]][empty_tile[1]] = grid[new_empty_tile[0]][new_empty_tile[1]]
