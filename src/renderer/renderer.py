@@ -5,6 +5,10 @@ def welcome():
     return 'Welcome to the 15 puzzle game.'
 
 
+def goodbye():
+    return 'Goodbye!'
+
+
 def show_grid(grid):
     horizontal_line = '\n|' + ('-' * (len(grid) * 5 - 1)) + '|\n'
     grid_to_show = horizontal_line

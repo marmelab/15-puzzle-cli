@@ -1,7 +1,7 @@
 import sys
 from game.exception import MoveException
 from game.game import Move, build_grid, possible_moves, move
-from renderer.renderer import welcome, show_grid, ask_move, show_moves
+from renderer.renderer import welcome, goodbye, show_grid, ask_move, show_moves
 
 
 def init():
@@ -22,5 +22,5 @@ if __name__ == '__main__':
     try:
         init()
     except KeyboardInterrupt:
-        print('\nGoodbye')
+        print('\n' + goodbye())
         sys.exit(0)
