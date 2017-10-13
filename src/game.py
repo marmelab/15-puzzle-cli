@@ -55,7 +55,7 @@ def move(grid, direction):
     y, x = find_empty_tile(grid)
 
     if direction not in possible_moves(grid):
-        return grid
+        raise MoveException('This direction is not allowed')
 
     if direction == Move.TOP:
         new_x = x
@@ -69,8 +69,6 @@ def move(grid, direction):
     elif direction == Move.LEFT:
         new_x = x - 1
         new_y = y
-    else:
-        raise MoveException('This direction is not allowed')
 
     new_grid = grid.copy()
     new_grid[y][x] = grid[new_y][new_x]

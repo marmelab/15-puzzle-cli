@@ -10,11 +10,11 @@ def init():
     while True:
         print(show_grid(grid))
         print(show_moves(possible_moves(grid)))
+        direction = ask_move()
         try:
-            direction = ask_move()
             grid = move(grid, direction)
         except MoveException as error:
-            print(error)
+            print('=> ' + str(error))
 
 
 if __name__ == '__main__':

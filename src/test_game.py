@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from game import Move, build_grid, find_empty_tile, possible_moves, move
-from game_exception import NoEmptyTileException
+from game_exception import MoveException, NoEmptyTileException
 
 
 class GameTest(unittest.TestCase):
@@ -70,12 +70,13 @@ class GameTest(unittest.TestCase):
         self.assertEqual(possible_moves(grid), expected_possible_moves)
 
     def test_moves_impossible(self):
-        grid = move(np.array([
+        grid = np.array([
             [1, 2, 3, 4],
             [5, 6, 7, 8],
             [9, 10, 11, 12],
             [13, 14, 15, 0]
-        ]), Move.BOTTOM)
+        ])
+        self.assertRaises(MoveException, move, grid, Move.BOTTOM)
         self.assertTrue(np.array_equal(grid, np.array([
             [1, 2, 3, 4],
             [5, 6, 7, 8],
