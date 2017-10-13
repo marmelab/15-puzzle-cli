@@ -8,7 +8,8 @@ class GameTest(unittest.TestCase):
 
     def test_possible_moves(self):
         expected_possible_moves = [Move.TOP, Move.LEFT]
-        self.assertEqual(possible_moves([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]), expected_possible_moves)
+        current_moves = possible_moves([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]])
+        self.assertEqual(current_moves, expected_possible_moves)
 
     def test_moves(self):
         expected_grid = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 0], [13, 14, 15, 12]]
@@ -25,4 +26,4 @@ class GameTest(unittest.TestCase):
 
     def test_moves_impossible(self):
         grid = move([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], Move.BOTTOM)
-        self.assertEqual(grid, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]])        
+        self.assertEqual(grid, [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]])

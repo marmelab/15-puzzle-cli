@@ -1,5 +1,6 @@
 from game import Move
 
+
 def welcome():
     return 'Welcome to the 15 puzzle game.'
 
@@ -18,7 +19,7 @@ def show_grid(grid):
 
 def show_moves(possible_moves):
     msg = 'You are allowed to go: '
-    
+
     for move in possible_moves:
         if move == Move.TOP:
             msg += '(T)op '
