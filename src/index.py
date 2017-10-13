@@ -1,6 +1,6 @@
 import sys
 from game.exception import MoveException
-from game.game import Move, build_grid, possible_moves, move
+from game.game import build_grid, movable_tiles, move
 from renderer.renderer import welcome, goodbye, show_grid, ask_move, show_moves
 
 
@@ -10,10 +10,10 @@ def init():
 
     while True:
         print(show_grid(grid))
-        print(show_moves(possible_moves(grid)))
-        direction = ask_move()
+        print(show_moves(movable_tiles(grid)))
+        tile_to_move = input(ask_move())
         try:
-            grid = move(grid, direction)
+            grid = move(grid, tile_to_move)
         except MoveException as error:
             print('=> ' + str(error))
 
