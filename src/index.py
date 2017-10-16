@@ -13,7 +13,7 @@ def router(action, grid, shuffled):
 
 
 def init():
-    print('\n\n' + welcome(), end='\n\n')
+    print('\n\n%s\n\n' % welcome())
     grid = build_grid()
     started_grid = grid.copy()
     shuffled = False
