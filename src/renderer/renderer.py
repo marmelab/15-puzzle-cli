@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def welcome():
     return 'Welcome to the 15 puzzle game.'
 
@@ -22,16 +25,29 @@ def show_action_not_valid(action):
     return '"%s" is not a valid action' % action
 
 
+def build_line(start_symb, stop_symb, sep_symb, line):
+    return '\n%s%s%s\n' % (start_symb, sep_symb.join(line), stop_symb)
+
+
 def show_grid(grid):
-    horizontal_line = '\n|%s|\n' % ('-' * (len(grid) * 5 - 1))
-    grid_to_show = horizontal_line
-    for row in grid:
-        grid_to_show += '|'
+    size = len(grid)
+
+    tile_line = np.full(size, '─' * size).tolist()
+
+    horizontal_line = build_line('├', '┤', '┼', tile_line)
+    first_horizontal_line = build_line('┌', '┐', '┬', tile_line)
+    last_horizontal_line = build_line('└', '┘', '┴', tile_line)
+
+    grid_to_show = first_horizontal_line
+    for count, row in enumerate(grid):
+        grid_to_show += '│'
         for tile in row:
             if tile == 0:
                 tile = '  '
-            grid_to_show += ' %s |' % '{0:>2}'.format(tile)
-        grid_to_show += horizontal_line
+            grid_to_show += ' %s │' % '{0:>2}'.format(tile)
+        if not count == size - 1:
+            grid_to_show += horizontal_line
+    grid_to_show += last_horizontal_line
     return grid_to_show
 
 

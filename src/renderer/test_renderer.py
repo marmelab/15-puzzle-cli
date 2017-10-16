@@ -2,7 +2,7 @@ from unittest import TestCase
 from renderer.renderer import (
     welcome, goodbye, shuffling, starting_turn,
     victory, show_action_not_valid,
-    show_grid, show_moves, show_menu_size, show_size_not_valid,
+    build_line, show_grid, show_moves, show_menu_size, show_size_not_valid,
     ask_move, ask_size
 )
 
@@ -32,6 +32,11 @@ class GameTest(TestCase):
     def test_show_action_not_valid_should_display_error(self):
         msg = '"Hello" is not a valid action'
         self.assertEqual(show_action_not_valid('Hello'), msg)
+
+    def test_build_line_should_build_line_with_chosen_symbols(self):
+        line = ['--', '--']
+        horizontal_line = '\n|--|--|\n'
+        self.assertEqual(build_line('|', '|', '|', line), horizontal_line)
 
     def test_show_grid_should_render_grid(self):
         grid_rendered = """
