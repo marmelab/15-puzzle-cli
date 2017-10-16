@@ -1,4 +1,6 @@
 import numpy as np
+import time
+from game.random import random_move
 from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
 
 
@@ -64,5 +66,9 @@ def move(grid, tile_to_move_arg):
     return new_grid
 
 
-def shuffle(grid):
-    return grid
+def shuffle(grid, tempo=1):
+    start = time.time()
+    while True:
+        if time.time() > start + tempo:
+            return grid
+        grid = move(grid, random_move(movable_tiles(grid)))

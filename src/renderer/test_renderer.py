@@ -1,5 +1,5 @@
 from unittest import TestCase
-from renderer.renderer import welcome, goodbye, show_action_not_valid, show_grid, show_moves, ask_move
+from renderer.renderer import welcome, goodbye, shuffling, show_action_not_valid, show_grid, show_moves, ask_move
 
 
 class GameTest(TestCase):
@@ -11,6 +11,10 @@ class GameTest(TestCase):
     def test_goodbye_should_render_goodbye_msg(self):
         msg = 'Goodbye!'
         self.assertEqual(goodbye(), msg)
+
+    def test_goodbye_should_render_goodbye_msg(self):
+        msg = 'Shuffling the puzzle...'
+        self.assertEqual(shuffling(), msg)
 
     def test_show_action_not_valid_should_display_error(self):
         msg = '"Hello" is not a valid action'

@@ -1,11 +1,12 @@
 import sys
 from game.exception import MoveException
 from game.game import build_grid, movable_tiles, move, shuffle
-from renderer.renderer import welcome, goodbye, show_action_not_valid, show_grid, ask_move, show_moves
+from renderer.renderer import welcome, goodbye, shuffling, show_action_not_valid, show_grid, ask_move, show_moves
 
 
 def router(action, grid, shuffled):
     if not shuffled and action in ['s', 'S']:
+        print(shuffling())
         return [shuffle(grid), True]
     else:
         return [move(grid, action), shuffled]

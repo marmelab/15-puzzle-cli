@@ -6,6 +6,10 @@ def goodbye():
     return 'Goodbye!'
 
 
+def shuffling():
+    return 'Shuffling the puzzle...'
+
+
 def show_action_not_valid(action):
     return '"' + action + '" is not a valid action'
 
