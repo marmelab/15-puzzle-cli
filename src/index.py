@@ -12,27 +12,32 @@ def router(action, grid, shuffled):
         return [move(grid, action), shuffled]
 
 
+def play_one_turn(grid, shuffled):
+    print(show_grid(grid))
+    print(show_moves(movable_tiles(grid)))
+    action = input(ask_move(shuffled))
+
+    try:
+        return router(action, grid, shuffled)
+    except ValueError:
+        print('=> ' + show_action_not_valid(action))
+    except MoveException as error:
+        print('=> ' + str(error))
+
+
+def play(grid_arg, started_grid):
+    grid, shuffled = play_one_turn(grid_arg, False)
+
+    while not do_i_win(grid, started_grid):
+        grid, shuffled = play_one_turn(grid, shuffled)
+
+
 def init():
     print('\n\n%s\n\n' % welcome())
     grid = build_grid()
     started_grid = grid.copy()
-    shuffled = False
-
-    while True:
-        print(show_grid(grid))
-        print(show_moves(movable_tiles(grid)))
-        action = input(ask_move(shuffled))
-
-        try:
-            grid, shuffled = router(action, grid, shuffled)
-        except ValueError:
-            print('=> ' + show_action_not_valid(action))
-        except MoveException as error:
-            print('=> ' + str(error))
-
-        if do_i_win(grid, started_grid):
-            print(victory())
-            break
+    play(grid, started_grid)
+    print('\n\n%s' % victory())
 
 if __name__ == '__main__':
     try:
