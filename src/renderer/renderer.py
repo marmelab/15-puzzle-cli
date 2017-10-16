@@ -11,18 +11,18 @@ def shuffling():
 
 
 def show_action_not_valid(action):
-    return '"' + action + '" is not a valid action'
+    return '"%s" is not a valid action' % action
 
 
 def show_grid(grid):
-    horizontal_line = '\n|' + ('-' * (len(grid) * 5 - 1)) + '|\n'
+    horizontal_line = '\n|%s|\n' % ('-' * (len(grid) * 5 - 1))
     grid_to_show = horizontal_line
     for row in grid:
         grid_to_show += '|'
         for tile in row:
             if tile == 0:
                 tile = '  '
-            grid_to_show += ' ' + '{0:>2}'.format(tile) + ' |'
+            grid_to_show += ' %s |' % '{0:>2}'.format(tile)
         grid_to_show += horizontal_line
     return grid_to_show
 

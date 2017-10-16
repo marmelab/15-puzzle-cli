@@ -70,7 +70,7 @@ class ShuffleThread(Thread):
     def __init__(self, grid):
         Thread.__init__(self)
         self.grid = grid
-        self.running = False        
+        self.running = False
 
     def run(self):
         self.running = True
