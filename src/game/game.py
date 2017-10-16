@@ -1,5 +1,5 @@
 import numpy as np
-import time
+from threading import Thread, Timer
 from game.random import random_move
 from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
 
@@ -66,9 +66,31 @@ def move(grid, tile_to_move_arg):
     return new_grid
 
 
-def shuffle(grid, tempo=1):
-    start = time.time()
-    while True:
-        if time.time() > start + tempo:
-            return grid
-        grid = move(grid, random_move(movable_tiles(grid)))
+class ShuffleThread(Thread):
+    def __init__(self, grid):
+        Thread.__init__(self)
+        self.grid = grid
+        self.running = False        
+
+    def run(self):
+        self.running = True
+        while self.running:
+            self.grid = move(self.grid, random_move(movable_tiles(self.grid)))
+
+    def stop(self):
+        self.running = False
+
+    def result(self):
+        return self.grid
+
+
+def shuffle(grid, timeout=1):
+    shuffle_thread = ShuffleThread(grid.copy())
+    time_thread = Timer(timeout, shuffle_thread.stop)
+
+    shuffle_thread.start()
+    time_thread.start()
+
+    shuffle_thread.join()
+
+    return shuffle_thread.result()

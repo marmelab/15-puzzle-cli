@@ -1,6 +1,7 @@
 import unittest
+from unittest.mock import patch
 import numpy as np
-from game.game import build_grid, find_tile, find_empty_tile, movable_tiles, move
+from game.game import build_grid, find_tile, find_empty_tile, movable_tiles, move, shuffle
 from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
 
 
@@ -97,3 +98,13 @@ class GameTest(unittest.TestCase):
             [9, 10, 11, 12],
             [13, 14, 15, 0]
         ])))
+
+    def test_shuffle_should_return_a_grid(self):
+        grid = np.array([
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 15, 0]
+        ])
+        with patch('game.game.move', return_value=grid):
+            self.assertTrue(np.array_equal(shuffle(grid), grid))
