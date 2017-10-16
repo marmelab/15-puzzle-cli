@@ -1,4 +1,6 @@
 import numpy as np
+from threading import Thread, Timer
+from game.random import random_move
 from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
 
 
@@ -44,11 +46,8 @@ def movable_tiles(grid):
     return list(map(int, tiles))
 
 
-def move(grid, tile_to_move):
-    try:
-        tile_to_move = int(tile_to_move)
-    except ValueError:
-        raise MoveException('The tile to move should be an integer')
+def move(grid, tile_to_move_arg):
+    tile_to_move = int(tile_to_move_arg)
 
     if tile_to_move not in movable_tiles(grid):
         raise MoveException('This tile cannot be moved')
@@ -65,3 +64,33 @@ def move(grid, tile_to_move):
     new_grid[empty_y][empty_x] = grid[new_y][new_x]
     new_grid[new_y][new_x] = grid[empty_y][empty_x]
     return new_grid
+
+
+class ShuffleThread(Thread):
+    def __init__(self, grid):
+        Thread.__init__(self)
+        self.grid = grid
+        self.running = False
+
+    def run(self):
+        self.running = True
+        while self.running:
+            self.grid = move(self.grid, random_move(movable_tiles(self.grid)))
+
+    def stop(self):
+        self.running = False
+
+    def result(self):
+        return self.grid
+
+
+def shuffle(grid, timeout=1):
+    shuffle_thread = ShuffleThread(grid.copy())
+    time_thread = Timer(timeout, shuffle_thread.stop)
+
+    shuffle_thread.start()
+    time_thread.start()
+
+    shuffle_thread.join()
+
+    return shuffle_thread.result()
