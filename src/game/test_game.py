@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import numpy as np
-from game.game import build_grid, find_tile, find_empty_tile, movable_tiles, move, shuffle
+from game.game import build_grid, find_tile, find_empty_tile, movable_tiles, move, do_i_win, shuffle
 from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
 
 
@@ -98,6 +98,36 @@ class GameTest(unittest.TestCase):
             [9, 10, 11, 12],
             [13, 14, 15, 0]
         ])))
+
+    def test_do_i_win_should_detect_victory(self):
+        grid = np.array([
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 15, 0]
+        ])
+        started_grid = np.array([
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 15, 0]
+        ])
+        self.assertTrue(do_i_win(grid, started_grid))
+
+    def test_do_i_win_should_not_detect_victory(self):
+        grid = np.array([
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 0, 15]
+        ])
+        started_grid = np.array([
+            [1, 2, 3, 4],
+            [5, 6, 7, 8],
+            [9, 10, 11, 12],
+            [13, 14, 15, 0]
+        ])
+        self.assertFalse(do_i_win(grid, started_grid))
 
     def test_shuffle_should_return_a_different_grid(self):
         started_grid = np.array([

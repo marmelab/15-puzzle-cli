@@ -1,7 +1,7 @@
 import sys
 from game.exception import MoveException
-from game.game import build_grid, movable_tiles, move, shuffle
-from renderer.renderer import welcome, goodbye, shuffling, show_action_not_valid, show_grid, ask_move, show_moves
+from game.game import build_grid, movable_tiles, move, do_i_win, shuffle
+from renderer.renderer import welcome, goodbye, shuffling, victory, show_action_not_valid, show_grid, ask_move, show_moves
 
 
 def router(action, grid, shuffled):
@@ -15,6 +15,7 @@ def router(action, grid, shuffled):
 def init():
     print('\n\n' + welcome(), end='\n\n')
     grid = build_grid()
+    started_grid = grid.copy()
     shuffled = False
 
     while True:
@@ -29,6 +30,9 @@ def init():
         except MoveException as error:
             print('=> ' + str(error))
 
+        if do_i_win(grid, started_grid):
+            print(victory())
+            break
 
 if __name__ == '__main__':
     try:
