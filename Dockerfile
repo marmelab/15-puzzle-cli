@@ -6,5 +6,5 @@ RUN rm requirements.txt
 
 ADD tox.ini .
 
-ADD src /src
+VOLUME /src
 WORKDIR /src
