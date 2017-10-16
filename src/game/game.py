@@ -33,15 +33,15 @@ def movable_tiles(grid):
 
     tiles = []
     if y - 1 >= 0:
-        tiles.append(int(grid[y - 1][x]))
+        tiles.append(grid[y - 1][x])
     if x + 1 < length:
-        tiles.append(int(grid[y][x + 1]))
+        tiles.append(grid[y][x + 1])
     if y + 1 < length:
-        tiles.append(int(grid[y + 1][x]))
+        tiles.append(grid[y + 1][x])
     if x - 1 >= 0:
-        tiles.append(int(grid[y][x - 1]))
+        tiles.append(grid[y][x - 1])
 
-    return tiles
+    return list(map(int, tiles))
 
 
 def move(grid, tile_to_move):
