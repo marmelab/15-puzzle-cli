@@ -6,6 +6,10 @@ def goodbye():
     return 'Goodbye!'
 
 
+def show_action_not_valid(action):
+    return '"' + action + '" is not a valid action'
+
+
 def show_grid(grid):
     horizontal_line = '\n|' + ('-' * (len(grid) * 5 - 1)) + '|\n'
     grid_to_show = horizontal_line
@@ -27,5 +31,9 @@ def show_moves(movable_tiles):
     return msg
 
 
-def ask_move():
-    return 'Choose a tile to move: '
+def ask_move(suffled):
+    msg = 'Choose a tile to move'
+    if not suffled:
+        msg += ' or press (S) to shuffle'
+    msg += ': '
+    return msg

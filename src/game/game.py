@@ -44,11 +44,8 @@ def movable_tiles(grid):
     return list(map(int, tiles))
 
 
-def move(grid, tile_to_move):
-    try:
-        tile_to_move = int(tile_to_move)
-    except ValueError:
-        raise MoveException('The tile to move should be an integer')
+def move(grid, tile_to_move_arg):
+    tile_to_move = int(tile_to_move_arg)
 
     if tile_to_move not in movable_tiles(grid):
         raise MoveException('This tile cannot be moved')
@@ -65,3 +62,7 @@ def move(grid, tile_to_move):
     new_grid[empty_y][empty_x] = grid[new_y][new_x]
     new_grid[new_y][new_x] = grid[empty_y][empty_x]
     return new_grid
+
+
+def shuffle(grid):
+    return grid
