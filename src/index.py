@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from game.exception import MoveException
 from game.game import (
     MIN_SIZE, MAX_SIZE, DEFAULT_SIZE,
@@ -20,6 +20,7 @@ def router(action, grid, shuffled):
 
 
 def play_one_turn(grid, shuffled):
+    os.system('clear')
     print(show_grid(grid))
     print(show_moves(movable_tiles(grid)))
 
@@ -59,7 +60,8 @@ def change_size(min_size, max_size, default_size):
 
 
 def init():
-    print('\n\n%s\n\n' % welcome())
+    os.system('clear')
+    print('%s\n\n' % welcome())
     size = change_size(MIN_SIZE, MAX_SIZE, DEFAULT_SIZE)
     grid = build_grid(size)
     started_grid = grid.copy()
