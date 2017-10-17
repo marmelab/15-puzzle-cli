@@ -10,8 +10,12 @@ def shuffling():
     return 'Shuffling the puzzle...'
 
 
-def victory():
-    return 'GGWP, you solved the puzzle!'
+def starting_turn(turn_number):
+    return 'Turn %s' % turn_number
+
+
+def victory(turn_number):
+    return 'GGWP, you solved the puzzle in %s turns!' % (turn_number - 1)
 
 
 def show_action_not_valid(action):
@@ -43,10 +47,12 @@ def show_size_not_valid(size):
     return 'Sorry, "%s" is not a valid size' % size
 
 
-def ask_move(shuffled):
-    msg = 'Choose a tile to move or press (W) to resize'
-    if not shuffled:
-        msg += ' or press (S) to shuffle'
+def ask_move(key_resize, key_shuffle):
+    msg = 'Choose a tile to move'
+    if key_resize:
+        msg += ' or press (%s) to resize' % key_resize
+    if key_shuffle:
+        msg += ' or press (%s) to shuffle' % key_shuffle
     msg += ': '
     return msg
 

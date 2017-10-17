@@ -5,9 +5,9 @@ from game.game import (
     build_grid, movable_tiles, move, is_grid_resolved, shuffle
 )
 from renderer.renderer import (
-    welcome, goodbye, shuffling, victory, show_action_not_valid,
-    show_grid, show_moves, show_menu_size, show_size_not_valid,
-    ask_move, ask_size
+    welcome, goodbye, shuffling, starting_turn,
+    victory, show_action_not_valid,
+    show_grid, show_moves, show_menu_size, show_size_not_valid, ask_move, ask_size
 )
 
 
@@ -22,13 +22,17 @@ def router(action, grid, started_grid, shuffled):
         return [move(grid, action), started_grid, True]
 
 
-def play_one_turn(grid, started_grid, shuffled):
+def play_one_turn(grid, started_grid, turn_number, shuffled):
     os.system('clear')
+    print(starting_turn(turn_number))
     print(show_grid(grid))
     print(show_moves(movable_tiles(grid)))
 
     while True:
-        action = input('\n%s' % ask_move(shuffled))
+        if not shuffled:
+            action = input('\n%s' % ask_move('W', 'S'))
+        else:
+            action = input('\n%s' % ask_move('W', None))
 
         try:
             return router(action, grid, started_grid, shuffled)
@@ -39,10 +43,14 @@ def play_one_turn(grid, started_grid, shuffled):
 
 
 def play(grid_arg, started_grid_arg):
-    grid, started_grid, shuffled = play_one_turn(grid_arg, started_grid_arg, False)
+    turn_number = 1
+    grid, started_grid, shuffled = play_one_turn(grid_arg, started_grid_arg, turn_number, False)
     while not shuffled or not is_grid_resolved(grid, started_grid):
-        grid, started_grid, shuffled = play_one_turn(grid, started_grid, shuffled)
-    return grid
+        if not shuffled:
+            turn_number = 1
+        grid, started_grid, shuffled = play_one_turn(grid, started_grid, turn_number, shuffled)
+        turn_number += 1
+    return [grid, turn_number]
 
 
 def change_size():
@@ -58,10 +66,10 @@ def init():
     os.system('clear')
     print('%s\n\n' % welcome())
     grid = build_grid()
-    grid = play(grid, grid.copy())
+    grid, turn_number = play(grid, grid.copy())
     os.system('clear')
+    print('\n\n%s' % victory(turn_number))
     print(show_grid(grid))
-    print('\n\n%s' % victory())
 
 
 if __name__ == '__main__':
