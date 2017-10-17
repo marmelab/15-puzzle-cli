@@ -44,6 +44,7 @@ def play(grid_arg, started_grid_arg):
         grid, started_grid, shuffled = play_one_turn(grid, started_grid, shuffled)
     return grid
 
+
 def change_size():
     while True:
         try:
