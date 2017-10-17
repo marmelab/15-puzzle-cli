@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 import numpy as np
-from game.game import build_grid, find_tile, find_empty_tile, movable_tiles, move, is_grid_resolved, shuffle
-from game.exception import MoveException, NoEmptyTileException, NoTileFoundException
+from game.game import MIN_SIZE, MAX_SIZE, DEFAULT_SIZE, build_grid, find_tile, find_empty_tile, movable_tiles, move, is_grid_resolved, shuffle
+from game.exception import SizeNotValidException, MoveException, NoEmptyTileException, NoTileFoundException
 
 
 class GameTest(unittest.TestCase):
@@ -13,6 +13,18 @@ class GameTest(unittest.TestCase):
             [9, 10, 11, 12],
             [13, 14, 15, 0]
         ])))
+
+    def test_build_grid_should_allow_multiple_sizes(self):
+        self.assertTrue(np.array_equal(build_grid(3), np.array([
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 0]
+        ])))
+
+    def test_build_grid_should_raise_error_if_size_not_valid(self):
+        self.assertRaises(SizeNotValidException, build_grid, 17)
+        self.assertRaises(SizeNotValidException, build_grid, -1)
+        self.assertRaises(SizeNotValidException, build_grid, 1)
 
     def test_find_tile_should_return_coords_of_a_tile(self):
         grid = np.array([

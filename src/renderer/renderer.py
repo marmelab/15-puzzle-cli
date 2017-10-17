@@ -32,11 +32,15 @@ def show_grid(grid):
 
 
 def show_moves(movable_tiles):
-    msg = 'You are allowed to move: '
+    return 'You are allowed to move (%s) ' % ', '.join(str(tile) for tile in movable_tiles)
 
-    for tile in movable_tiles:
-        msg += str(tile) + ' '
-    return msg
+
+def show_menu_size(key):
+    return 'Press (%s) to change the puzzle size, press any other key to use the default one: ' % key
+
+
+def show_size_not_valid(size):
+    return 'Sorry, "%s" is not a valid size' % size
 
 
 def ask_move(suffled):
@@ -45,3 +49,7 @@ def ask_move(suffled):
         msg += ' or press (S) to shuffle'
     msg += ': '
     return msg
+
+
+def ask_size(min_size=2, max_size=10):
+    return 'Choose a new size (from %s to %s): ' % (min_size, max_size)
