@@ -1,6 +1,6 @@
 import sys
 from game.exception import MoveException
-from game.game import build_grid, movable_tiles, move, do_i_win, shuffle
+from game.game import build_grid, movable_tiles, move, is_grid_resolved, shuffle
 from renderer.renderer import welcome, goodbye, shuffling, victory, show_action_not_valid, show_grid, ask_move, show_moves
 
 
@@ -28,7 +28,7 @@ def play_one_turn(grid, shuffled):
 def play(grid_arg, started_grid):
     grid, shuffled = play_one_turn(grid_arg, False)
 
-    while not do_i_win(grid, started_grid):
+    while not is_grid_resolved(grid, started_grid):
         grid, shuffled = play_one_turn(grid, shuffled)
 
 
