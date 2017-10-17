@@ -66,6 +66,8 @@ def init():
     grid = build_grid(size)
     started_grid = grid.copy()
     play(grid, started_grid)
+    os.system('clear')    
+    print(show_grid(grid))
     print('\n\n%s' % victory())
 
 
