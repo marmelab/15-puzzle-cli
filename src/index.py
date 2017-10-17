@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 from game.exception import MoveException
 from game.game import (
     MIN_SIZE, MAX_SIZE, DEFAULT_SIZE,
@@ -66,7 +67,7 @@ def init():
     grid = build_grid(size)
     started_grid = grid.copy()
     play(grid, started_grid)
-    os.system('clear')    
+    os.system('clear')
     print(show_grid(grid))
     print('\n\n%s' % victory())
 

@@ -32,7 +32,7 @@ def show_grid(grid):
 
 
 def show_moves(movable_tiles):
-    return 'You are allowed to move (%s) ' % ', '.join(str(tile) for tile in movable_tiles)
+    return 'You are allowed to move (%s)' % ', '.join(str(tile) for tile in movable_tiles)
 
 
 def show_menu_size(key):
