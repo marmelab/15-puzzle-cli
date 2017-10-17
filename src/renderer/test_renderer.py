@@ -61,11 +61,11 @@ class GameTest(TestCase):
         self.assertEqual(show_size_not_valid('hello'), msg)
 
     def test_ask_move_should_render_ask_move_msg_without_shuffle_option(self):
-        msg = 'Choose a tile to move: '
+        msg = 'Choose a tile to move or press (W) to resize: '
         self.assertEqual(ask_move(True), msg)
 
     def test_ask_move_should_render_ask_move_msg_witt_shuffle_option(self):
-        msg = 'Choose a tile to move or press (S) to shuffle: '
+        msg = 'Choose a tile to move or press (W) to resize or press (S) to shuffle: '
         self.assertEqual(ask_move(False), msg)
 
     def test_ask_size_should_render_ask_size_msg_with_default_values(self):

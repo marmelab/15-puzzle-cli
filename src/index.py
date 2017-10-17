@@ -15,6 +15,8 @@ def router(action, grid, shuffled):
     if not shuffled and action in ['s', 'S']:
         print(shuffling())
         return [shuffle(grid), True]
+    elif action in ['w', 'W']:
+        return [change_size(), False]
     else:
         return [move(grid, action), shuffled]
 
@@ -43,13 +45,10 @@ def play(grid_arg, started_grid):
 
 
 def change_size():
-    use_custom_size = input(show_menu_size('W')) in ['w', 'W']
     while True:
         try:
-            if use_custom_size:
-                size = int(input(ask_size()))
-                return build_grid(size)
-            return build_grid()
+            size = int(input(ask_size()))
+            return build_grid(size)
         except (ValueError, GridSizeNotValidException):
             print(show_size_not_valid(size))
 
@@ -57,7 +56,7 @@ def change_size():
 def init():
     os.system('clear')
     print('%s\n\n' % welcome())
-    grid = change_size()
+    grid = build_grid()
     started_grid = grid.copy()
     play(grid, started_grid)
     os.system('clear')

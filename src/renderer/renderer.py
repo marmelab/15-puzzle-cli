@@ -43,9 +43,9 @@ def show_size_not_valid(size):
     return 'Sorry, "%s" is not a valid size' % size
 
 
-def ask_move(suffled):
-    msg = 'Choose a tile to move'
-    if not suffled:
+def ask_move(shuffled):
+    msg = 'Choose a tile to move or press (W) to resize'
+    if not shuffled:
         msg += ' or press (S) to shuffle'
     msg += ': '
     return msg
