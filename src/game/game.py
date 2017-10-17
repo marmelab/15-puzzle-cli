@@ -66,6 +66,10 @@ def move(grid, tile_to_move_arg):
     return new_grid
 
 
+def is_grid_resolved(grid, started_grid):
+    return np.array_equal(grid, started_grid)
+
+
 class ShuffleThread(Thread):
     def __init__(self, grid):
         Thread.__init__(self)

@@ -10,6 +10,10 @@ def shuffling():
     return 'Shuffling the puzzle...'
 
 
+def victory():
+    return 'GGWP, you solved the puzzle!'
+
+
 def show_action_not_valid(action):
     return '"%s" is not a valid action' % action
 
