@@ -11,17 +11,18 @@ from renderer.renderer import (
 )
 
 
-def router(action, grid, shuffled):
+def router(action, grid, started_grid, shuffled):
     if not shuffled and action in ['s', 'S']:
         print(shuffling())
-        return [shuffle(grid), True]
+        return [shuffle(grid), started_grid, True]
     elif action in ['w', 'W']:
-        return [change_size(), False]
+        new_grid = change_size()
+        return [new_grid, new_grid.copy(), False]
     else:
-        return [move(grid, action), shuffled]
+        return [move(grid, action), started_grid, True]
 
 
-def play_one_turn(grid, shuffled):
+def play_one_turn(grid, started_grid, shuffled):
     os.system('clear')
     print(show_grid(grid))
     print(show_moves(movable_tiles(grid)))
@@ -30,19 +31,18 @@ def play_one_turn(grid, shuffled):
         action = input('\n%s' % ask_move(shuffled))
 
         try:
-            return router(action, grid, shuffled)
+            return router(action, grid, started_grid, shuffled)
         except ValueError:
             print('=> ' + show_action_not_valid(action))
         except MoveException as error:
             print('=> ' + str(error))
 
 
-def play(grid_arg, started_grid):
-    grid, shuffled = play_one_turn(grid_arg, False)
-
-    while not is_grid_resolved(grid, started_grid):
-        grid, shuffled = play_one_turn(grid, shuffled)
-
+def play(grid_arg, started_grid_arg):
+    grid, started_grid, shuffled = play_one_turn(grid_arg, started_grid_arg, False)
+    while not shuffled or not is_grid_resolved(grid, started_grid):
+        grid, started_grid, shuffled = play_one_turn(grid, started_grid, shuffled)
+    return grid
 
 def change_size():
     while True:
@@ -57,8 +57,7 @@ def init():
     os.system('clear')
     print('%s\n\n' % welcome())
     grid = build_grid()
-    started_grid = grid.copy()
-    play(grid, started_grid)
+    grid = play(grid, grid.copy())
     os.system('clear')
     print(show_grid(grid))
     print('\n\n%s' % victory())
