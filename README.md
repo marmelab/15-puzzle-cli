@@ -4,9 +4,9 @@ A CLI tool to play the 15-puzzle game.
 
 ## Contributing
 
-### Build
+### Install
 
-`make build`
+`make install`
 
 ### Run the game
 
