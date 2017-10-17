@@ -2,7 +2,7 @@ class GameRuleException(Exception):
     pass
 
 
-class SizeNotValidException(GameRuleException):
+class GridSizeNotValidException(GameRuleException):
     pass
 
 

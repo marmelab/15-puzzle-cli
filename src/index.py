@@ -1,8 +1,7 @@
 import sys
 import os
-from game.exception import MoveException
+from game.exception import GridSizeNotValidException, MoveException
 from game.game import (
-    MIN_SIZE, MAX_SIZE, DEFAULT_SIZE,
     build_grid, movable_tiles, move, is_grid_resolved, shuffle
 )
 from renderer.renderer import (
@@ -43,28 +42,22 @@ def play(grid_arg, started_grid):
         grid, shuffled = play_one_turn(grid, shuffled)
 
 
-def change_size(min_size, max_size, default_size):
-    if input(show_menu_size('W')) in ['w', 'W']:
-        size_valid = False
-        while not size_valid:
-            try:
+def change_size():
+    use_custom_size = input(show_menu_size('W')) in ['w', 'W']
+    while True:
+        try:
+            if use_custom_size:
                 size = int(input(ask_size()))
-                if not min_size <= size <= max_size:
-                    raise ValueError
-                else:
-                    size_valid = True
-            except ValueError:
-                print(show_size_not_valid(size))
-        return size
-    else:
-        return default_size
+                return build_grid(size)
+            return build_grid()
+        except (ValueError, GridSizeNotValidException):
+            print(show_size_not_valid(size))
 
 
 def init():
     os.system('clear')
     print('%s\n\n' % welcome())
-    size = change_size(MIN_SIZE, MAX_SIZE, DEFAULT_SIZE)
-    grid = build_grid(size)
+    grid = change_size()
     started_grid = grid.copy()
     play(grid, started_grid)
     os.system('clear')
