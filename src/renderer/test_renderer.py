@@ -1,6 +1,7 @@
 from unittest import TestCase
 from renderer.renderer import (
-    welcome, goodbye, shuffling, victory, show_action_not_valid,
+    welcome, goodbye, shuffling, starting_turn,
+    victory, show_action_not_valid,
     show_grid, show_moves, show_menu_size, show_size_not_valid,
     ask_move, ask_size
 )
@@ -21,8 +22,12 @@ class GameTest(TestCase):
         self.assertEqual(shuffling(), msg)
 
     def test_victory_should_render_victory_msg(self):
-        msg = 'GGWP, you solved the puzzle!'
-        self.assertEqual(victory(), msg)
+        msg = 'GGWP, you solved the puzzle in 5 turns!'
+        self.assertEqual(victory(6), msg)
+
+    def test_starting_turn_should_render_starting_msg(self):
+        msg = 'Turn 12'
+        self.assertEqual(starting_turn(12), msg)
 
     def test_show_action_not_valid_should_display_error(self):
         msg = '"Hello" is not a valid action'
@@ -61,12 +66,16 @@ class GameTest(TestCase):
         self.assertEqual(show_size_not_valid('hello'), msg)
 
     def test_ask_move_should_render_ask_move_msg_without_shuffle_option(self):
-        msg = 'Choose a tile to move or press (W) to resize: '
-        self.assertEqual(ask_move(True), msg)
+        msg = 'Choose a tile to move: '
+        self.assertEqual(ask_move(None, None), msg)
 
-    def test_ask_move_should_render_ask_move_msg_witt_shuffle_option(self):
-        msg = 'Choose a tile to move or press (W) to resize or press (S) to shuffle: '
-        self.assertEqual(ask_move(False), msg)
+    def test_ask_move_should_render_ask_move_msg_with_only_shuffle_option(self):
+        msg = 'Choose a tile to move or press (S) to shuffle: '
+        self.assertEqual(ask_move(None, 'S'), msg)
+
+    def test_ask_move_should_render_ask_move_msg_with_custom_keys(self):
+        msg = 'Choose a tile to move or press (X) to resize or press (Y) to shuffle: '
+        self.assertEqual(ask_move('X', 'Y'), msg)
 
     def test_ask_size_should_render_ask_size_msg_with_default_values(self):
         msg = 'Choose a new size (from 2 to 10): '
