@@ -2,6 +2,10 @@ class GameRuleException(Exception):
     pass
 
 
+class GridSizeNotValidException(GameRuleException):
+    pass
+
+
 class NoEmptyTileException(GameRuleException):
     pass
 

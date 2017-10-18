@@ -1,5 +1,9 @@
 from unittest import TestCase
-from renderer.renderer import welcome, goodbye, shuffling, victory, show_action_not_valid, show_grid, show_moves, ask_move
+from renderer.renderer import (
+    welcome, goodbye, shuffling, victory, show_action_not_valid,
+    show_grid, show_moves, show_menu_size, show_size_not_valid,
+    ask_move, ask_size
+)
 
 
 class GameTest(TestCase):
@@ -45,13 +49,29 @@ class GameTest(TestCase):
         self.assertEqual(show_grid(grid), grid_rendered)
 
     def test_show_moves_should_render_possible_moves_msg(self):
-        msg = 'You are allowed to move: 12 15 '
+        msg = 'You are allowed to move (12, 15)'
         self.assertEqual(show_moves([12, 15]), msg)
 
+    def show_menu_size_should_render_menu_size_msg(self):
+        msg = 'Press (W) to change the puzzle size, press any other key to use the default one: '
+        self.assertEqual(show_menu_size('W'), msg)
+
+    def test_size_not_valid_should_render_size_not_valid_error_msg(self):
+        msg = 'Sorry, "hello" is not a valid size'
+        self.assertEqual(show_size_not_valid('hello'), msg)
+
     def test_ask_move_should_render_ask_move_msg_without_shuffle_option(self):
-        msg = 'Choose a tile to move: '
+        msg = 'Choose a tile to move or press (W) to resize: '
         self.assertEqual(ask_move(True), msg)
 
     def test_ask_move_should_render_ask_move_msg_witt_shuffle_option(self):
-        msg = 'Choose a tile to move or press (S) to shuffle: '
+        msg = 'Choose a tile to move or press (W) to resize or press (S) to shuffle: '
         self.assertEqual(ask_move(False), msg)
+
+    def test_ask_size_should_render_ask_size_msg_with_default_values(self):
+        msg = 'Choose a new size (from 2 to 10): '
+        self.assertEqual(ask_size(), msg)
+
+    def test_ask_size_should_render_ask_size_msg_with_custom_values(self):
+        msg = 'Choose a new size (from 4 to 8): '
+        self.assertEqual(ask_size(4, 8), msg)
