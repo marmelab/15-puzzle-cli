@@ -32,7 +32,7 @@ def build_line(start_symb, stop_symb, sep_symb, line):
 def show_grid(grid):
     size = len(grid)
 
-    tile_line = np.full(size, '─' * size).tolist()
+    tile_line = np.full(size, '─' * 4).tolist()
 
     horizontal_line = build_line('├', '┤', '┼', tile_line)
     first_horizontal_line = build_line('┌', '┐', '┬', tile_line)
