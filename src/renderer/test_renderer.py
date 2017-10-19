@@ -58,6 +58,23 @@ class GameTest(TestCase):
         ]
         self.assertEqual(show_grid(grid), grid_rendered)
 
+    def test_show_grid_should_render_grid_with_custom_size(self):
+        grid_rendered = """
+┌────┬────┬────┐
+│  1 │  2 │  3 │
+├────┼────┼────┤
+│  4 │  5 │  6 │
+├────┼────┼────┤
+│  7 │  8 │    │
+└────┴────┴────┘
+"""  # noqa
+        grid = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 0]
+        ]
+        self.assertEqual(show_grid(grid), grid_rendered)
+
     def test_show_moves_should_render_possible_moves_msg(self):
         msg = 'You are allowed to move (12, 15)'
         self.assertEqual(show_moves([12, 15]), msg)
