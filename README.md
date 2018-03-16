@@ -2,7 +2,7 @@
 
 A cli tool to play the 15-puzzle game, in Python.
 
-> See the [related article](https//marmelab.com/blog/2017/10/25/jeu-du-taquin-en-python.html) on the Marmelab blog
+> See the [related article](https://marmelab.com/blog/2017/10/25/jeu-du-taquin-en-python.html) on the Marmelab blog
 
 ## Help
 
