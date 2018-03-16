@@ -1,17 +1,47 @@
 # 15-puzzle-cli
 
-A CLI tool to play the 15-puzzle game.
+A cli tool to play the 15-puzzle game, in Python.
+
+> See the [related article](https//marmelab.com/blog/2017/10/25/jeu-du-taquin-en-python.html) on the Marmelab blog
+
+## Help
+
+Print all available commands
+
+```bash
+make
+```
+
+## Build
+
+Build the docker
+
+```bash
+make install
+```
+
+## Run the game
+
+Run the 15-puzzle game
+
+```bash
+make run
+```
 
 ## Contributing
 
-### Install
+### Test
 
-`make install`
+Run all tests
 
-### Run the game
+```bash
+make test
+```
 
-`make run`
+### Linter
 
-### Run the tests
+Run the pep8 linter
 
-`make test`
+```bash
+make lint
+```
